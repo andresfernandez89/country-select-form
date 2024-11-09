@@ -2,8 +2,8 @@ import * as formik from "formik";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import * as yup from "yup";
+import ModalUser from "../ModalUser/ModalUser";
 import styles from "./formUser.module.css";
-import ModalUser from "./ModalUser";
 
 function FormUser() {
   const [modalShow, setModalShow] = useState(false);
