@@ -2,12 +2,14 @@ import * as formik from "formik";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import * as yup from "yup";
+import { useCountry } from "../../hooks/useCountry";
 import ModalUser from "../ModalUser/ModalUser";
 import styles from "./formUser.module.css";
 
 function FormUser() {
   const [modalShow, setModalShow] = useState(false);
   const { Formik } = formik;
+  const { countries } = useCountry();
 
   const schema = yup.object().shape({
     country: yup
@@ -117,9 +119,12 @@ function FormUser() {
                   isInvalid={touched.country && !!errors.country}
                 >
                   <option>Selecciona un país</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  {countries &&
+                    countries.map((country) => (
+                      <option key={country} value={country}>
+                        {country}
+                      </option>
+                    ))}
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   {errors.country}

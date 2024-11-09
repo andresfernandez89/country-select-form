@@ -3,21 +3,10 @@ import { FormEvent } from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { IFormValues } from "../../types/form";
+import { IModalUserProps } from "../../types/modal";
 
-interface ModalUserProps {
-  show: boolean;
-  onHide: () => void;
-}
-
-interface IFormValues {
-  fullName: string;
-  email: string;
-  address: string;
-  city: string;
-  province: string;
-  country: string;
-}
-function ModalUser({ show, onHide }: ModalUserProps) {
+function ModalUser({ show, onHide }: IModalUserProps) {
   const { values, handleReset } = useFormikContext<IFormValues>();
   function handleOnSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
