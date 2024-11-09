@@ -1,9 +1,12 @@
 import * as formik from "formik";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Container, Form } from "react-bootstrap";
 import * as yup from "yup";
 import styles from "./formUser.module.css";
+import ModalUser from "./ModalUser";
 
 function FormUser() {
+  const [modalShow, setModalShow] = useState(false);
   const { Formik } = formik;
 
   const schema = yup.object().shape({
@@ -33,12 +36,13 @@ function FormUser() {
 
   return (
     <Container
-      className={`${styles.containerForm} md:w-75 h-100 d-flex align-items-center justify-content-center`}
+      className={`${styles.containerForm} col-12 col-sm-8 col-md-6 col-lg-4 col-xl-3 h-100 d-flex align-items-center justify-content-center`}
     >
       <Formik
         validationSchema={schema}
         onSubmit={(values) => {
           console.log(values);
+          setModalShow(true);
         }}
         enableReinitialize:true
         initialValues={{
@@ -58,9 +62,9 @@ function FormUser() {
           errors,
           handleReset,
         }) => (
-          <Form className="w-75" noValidate onSubmit={handleSubmit}>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="fullName">
+          <div className="w-100 border border-1 rounded-3 p-4">
+            <Form noValidate onSubmit={handleSubmit}>
+              <Form.Group className="fw-medium" controlId="fullName">
                 <Form.Label>Nombre Completo</Form.Label>
                 <Form.Control
                   type="text"
@@ -74,7 +78,7 @@ function FormUser() {
                   {errors.fullName}
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="email">
+              <Form.Group className="mt-3 fw-medium" controlId="email">
                 <Form.Label>Correo electrónico</Form.Label>
                 <Form.Control
                   type="text"
@@ -88,7 +92,7 @@ function FormUser() {
                   {errors.email}
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="address">
+              <Form.Group className="mt-3 fw-medium" controlId="address">
                 <Form.Label>Dirección</Form.Label>
                 <Form.Control
                   type="text"
@@ -102,9 +106,7 @@ function FormUser() {
                   {errors.address}
                 </Form.Control.Feedback>
               </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="selectCountry">
+              <Form.Group className="mt-3 fw-medium" controlId="selectCountry">
                 <Form.Label>País</Form.Label>
                 <Form.Select
                   aria-label="Seleccionar un país"
@@ -123,7 +125,7 @@ function FormUser() {
                   {errors.country}
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="selectProvince">
+              <Form.Group className="mt-3 fw-medium" controlId="selectProvince">
                 <Form.Label>Provincia</Form.Label>
                 <Form.Select
                   aria-label="Seleccionar una provincia"
@@ -142,7 +144,7 @@ function FormUser() {
                   {errors.province}
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="selectCity">
+              <Form.Group className="mt-3 fw-medium" controlId="selectCity">
                 <Form.Label>Ciudad</Form.Label>
                 <Form.Select
                   aria-label="Seleccionar una ciudad"
@@ -161,16 +163,17 @@ function FormUser() {
                   {errors.city}
                 </Form.Control.Feedback>
               </Form.Group>
-            </Row>
-            <div className="d-flex column-gap-1 justify-content-end">
-              <Button type="button" variant="danger" onClick={handleReset}>
-                Cancelar
-              </Button>
-              <Button type="submit" variant="success">
-                Guardar
-              </Button>
-            </div>
-          </Form>
+              <div className="d-flex column-gap-1 justify-content-between mt-4">
+                <Button type="button" variant="secondary" onClick={handleReset}>
+                  Cancelar
+                </Button>
+                <Button type="submit" variant="primary">
+                  Guardar
+                </Button>
+              </div>
+            </Form>
+            <ModalUser show={modalShow} onHide={() => setModalShow(false)} />
+          </div>
         )}
       </Formik>
     </Container>
