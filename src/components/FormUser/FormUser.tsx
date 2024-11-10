@@ -1,6 +1,7 @@
 import * as formik from "formik";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { useCity } from "../../hooks/useCity";
 import { useCountry } from "../../hooks/useCountry";
 import { useStateBy } from "../../hooks/useStateBy";
 import { schema } from "../../validations/validationSchema";
@@ -10,9 +11,11 @@ import styles from "./formUser.module.css";
 function FormUser() {
   const [modalShow, setModalShow] = useState(false);
   const [countrySelected, setCountrySelected] = useState<string | null>(null);
+  const [stateSelected, setStateSelected] = useState<string | null>(null);
   const { Formik } = formik;
   const { countries } = useCountry();
   const { states } = useStateBy(countrySelected);
+  const { cities } = useCity(countrySelected, stateSelected);
 
   return (
     <Container
@@ -20,8 +23,7 @@ function FormUser() {
     >
       <Formik
         validationSchema={schema}
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={() => {
           setModalShow(true);
         }}
         enableReinitialize:true
@@ -95,6 +97,7 @@ function FormUser() {
                   onChange={(e) => {
                     handleChange(e);
                     setCountrySelected(e.target.value);
+                    setStateSelected(null);
                   }}
                   isValid={touched.country && !errors.country}
                   isInvalid={touched.country && !!errors.country}
@@ -117,7 +120,10 @@ function FormUser() {
                   aria-label="Seleccionar una provincia"
                   name="province"
                   value={values.province}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    setStateSelected(e.target.value);
+                  }}
                   isValid={touched.province && !errors.province}
                   isInvalid={touched.province && !!errors.province}
                 >
@@ -144,9 +150,12 @@ function FormUser() {
                   isInvalid={touched.city && !!errors.city}
                 >
                   <option>Selecciona una ciudad</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  {cities &&
+                    cities.map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   {errors.city}
