@@ -1,15 +1,10 @@
 import { IApiUrlProps } from "../types/api";
 
-export const getApiUrl = async ({ path, method }: IApiUrlProps) => {
+export const getApiUrl = async ({ path, options }: IApiUrlProps) => {
   try {
     const response = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}${path}`,
-      {
-        method,
-        headers: {
-          Accept: "application/json",
-        },
-      },
+      options,
     );
 
     if (!response.ok) {
