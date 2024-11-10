@@ -1,40 +1,18 @@
 import * as formik from "formik";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import * as yup from "yup";
 import { useCountry } from "../../hooks/useCountry";
+import { useStateBy } from "../../hooks/useStateBy";
+import { schema } from "../../validations/validationSchema";
 import ModalUser from "../ModalUser/ModalUser";
 import styles from "./formUser.module.css";
 
 function FormUser() {
   const [modalShow, setModalShow] = useState(false);
+  const [countrySelected, setCountrySelected] = useState<string | null>(null);
   const { Formik } = formik;
   const { countries } = useCountry();
-
-  const schema = yup.object().shape({
-    country: yup
-      .string()
-      .required("El país es obligatorio")
-      .notOneOf(["Selecciona un país"], "Selecciona un país válido"),
-    province: yup
-      .string()
-      .required("La provincia es obligatoria")
-      .notOneOf(
-        ["Selecciona una provincia"],
-        "Selecciona una provincia válida",
-      ),
-    city: yup
-      .string()
-      .required("La ciudad es obligatoria")
-      .notOneOf(["Selecciona una ciudad"], "Selecciona una ciudad válida"),
-    fullName: yup.string().required("El nombre completo es obligatorio").trim(),
-    email: yup
-      .string()
-      .email("Debe ser un correo electrónico válido")
-      .required("El correo electrónico es obligatorio")
-      .trim(),
-    address: yup.string().optional().trim(),
-  });
+  const { states } = useStateBy(countrySelected);
 
   return (
     <Container
@@ -114,7 +92,10 @@ function FormUser() {
                   aria-label="Seleccionar un país"
                   name="country"
                   value={values.country}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    setCountrySelected(e.target.value);
+                  }}
                   isValid={touched.country && !errors.country}
                   isInvalid={touched.country && !!errors.country}
                 >
@@ -141,9 +122,12 @@ function FormUser() {
                   isInvalid={touched.province && !!errors.province}
                 >
                   <option>Selecciona una provincia</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  {states &&
+                    states.map((state) => (
+                      <option key={state} value={state}>
+                        {state}
+                      </option>
+                    ))}
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   {errors.province}
