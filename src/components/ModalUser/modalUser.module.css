@@ -2,9 +2,18 @@
   min-height: 100vh;
 }
 
+@media (min-width: 576px) {
+  .containerModal {
+    padding: 3rem;
+  }
+}
 .containerBody {
   height: 570px;
-  max-width: 350px;
+  padding: 0;
+  border-width: 0;
+}
+
+.cardBody {
   padding: 0;
 }
 

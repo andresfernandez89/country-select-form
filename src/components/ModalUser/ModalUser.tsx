@@ -23,7 +23,7 @@ function ModalUser({ show, onHide }: IModalUserProps) {
     >
       <Modal.Body>
         <Card className={styles.containerBody}>
-          <Card.Body>
+          <Card.Body className={styles.cardBody}>
             <Card.Title>Nombre Completo</Card.Title>
             <Card.Text className="text-secondary-emphasis">
               {values.fullName}
