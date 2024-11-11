@@ -23,7 +23,9 @@ function FormUser() {
     >
       <Formik
         validationSchema={schema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={() => {
+          setModalShow(true);
+        }}
         initialValues={{
           country: "",
           province: "",
@@ -32,6 +34,8 @@ function FormUser() {
           email: "",
           address: "",
         }}
+        validateOnChange={true}
+        validateOnBlur={false}
       >
         {({
           handleSubmit,
@@ -42,31 +46,31 @@ function FormUser() {
           setFieldValue,
           handleReset,
         }) => (
-          <div className="w-100 border border-1 rounded-3 p-4">
+          <div className="w-100 border border-1 rounded-3 p-4 bg-body-tertiary">
             <Form noValidate onSubmit={handleSubmit}>
               <Form.Group className="fw-medium" controlId="fullName">
-                <Form.Label>Nombre Completo</Form.Label>
+                <Form.Label>Nombre Completo*</Form.Label>
                 <Form.Control
                   type="text"
                   name="fullName"
                   value={values.fullName}
                   onChange={handleChange}
                   isValid={touched.fullName && !errors.fullName}
-                  isInvalid={!!errors.fullName}
+                  isInvalid={touched.city && !!errors.fullName}
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.fullName}
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mt-3 fw-medium" controlId="email">
-                <Form.Label>Correo electrónico</Form.Label>
+                <Form.Label>Correo electrónico*</Form.Label>
                 <Form.Control
                   type="text"
                   name="email"
                   value={values.email}
                   onChange={handleChange}
                   isValid={touched.email && !errors.email}
-                  isInvalid={!!errors.email}
+                  isInvalid={touched.email && !!errors.email}
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.email}
@@ -79,15 +83,14 @@ function FormUser() {
                   name="address"
                   value={values.address}
                   onChange={handleChange}
-                  isValid={touched.address && !errors.address}
-                  isInvalid={!!errors.address}
+                  isInvalid={touched.address && !!errors.address}
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.address}
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="fw-medium" controlId="selectCountry">
-                <Form.Label>País</Form.Label>
+                <Form.Label>País*</Form.Label>
                 <Form.Select
                   aria-label="Seleccionar un país"
                   name="country"
@@ -112,7 +115,7 @@ function FormUser() {
               </Form.Group>
 
               <Form.Group className="mt-3 fw-medium" controlId="selectProvince">
-                <Form.Label>Provincia</Form.Label>
+                <Form.Label>Provincia*</Form.Label>
                 <Form.Select
                   aria-label="Seleccionar una provincia"
                   name="province"
@@ -137,7 +140,7 @@ function FormUser() {
               </Form.Group>
 
               <Form.Group className="mt-3 fw-medium" controlId="selectCity">
-                <Form.Label>Ciudad</Form.Label>
+                <Form.Label>Ciudad*</Form.Label>
                 <Form.Select
                   aria-label="Seleccionar una ciudad"
                   name="city"

@@ -1,0 +1,13 @@
+.containerModal {
+  min-height: 100vh;
+}
+
+.containerBody {
+  height: 570px;
+  max-width: 350px;
+  padding: 0;
+}
+
+.containerButtons {
+  padding: 1.5rem 0rem;
+}
