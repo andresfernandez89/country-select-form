@@ -4,21 +4,16 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { IFormValues } from "../../types/form";
 import { IModalUserProps } from "../../types/modal";
+import showConfirmationAlert from "../alert/showConfirmationAlert";
 import styles from "./modalUser.module.css";
 
 function ModalUser({ show, onHide }: IModalUserProps) {
   const { values, handleReset } = useFormikContext<IFormValues>();
   function handleOnClick() {
-    alert(`Datos confirmados:
-      Nombre Completo: ${values.fullName}
-      Correo electrónico: ${values.email}
-      Dirección: ${values.address}
-      País: ${values.country}
-      Provincia: ${values.province}
-      Ciudad: ${values.city}`);
-
-    handleReset();
-    onHide();
+    showConfirmationAlert().then(() => {
+      handleReset();
+      onHide();
+    });
   }
   return (
     <Modal
