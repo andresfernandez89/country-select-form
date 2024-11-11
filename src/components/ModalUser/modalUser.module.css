@@ -1,0 +1,17 @@
+.containerModal {
+  min-height: 100vh;
+}
+
+.containerBody {
+  height: 530px;
+  padding: 0;
+  border-width: 0;
+}
+
+.cardBody {
+  padding: 0;
+}
+
+.containerButtons {
+  padding: 1.5rem 0rem;
+}
