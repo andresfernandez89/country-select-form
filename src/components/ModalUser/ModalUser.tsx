@@ -4,12 +4,14 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { IFormValues } from "../../types/form";
 import { IModalUserProps } from "../../types/modal";
-import showConfirmationAlert from "../alert/showConfirmationAlert";
-import showErrorConfirmationAlert from "../alert/showErrorConfirmationAlert";
+import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
+import showConfirmationAlert from "../Alert/showConfirmationAlert";
+import showErrorConfirmationAlert from "../Alert/showErrorConfirmationAlert";
 import styles from "./modalUser.module.css";
 
 function ModalUser({ show, onHide }: IModalUserProps) {
   const { values, handleReset } = useFormikContext<IFormValues>();
+
   async function handleOnClick() {
     try {
       //Casos de uso simulando envios reales.
@@ -45,7 +47,7 @@ function ModalUser({ show, onHide }: IModalUserProps) {
           <Card.Body className={styles.cardBody}>
             <Card.Title>Nombre Completo</Card.Title>
             <Card.Text className="text-secondary-emphasis">
-              {values.fullName}
+              {capitalizeFirstLetter(values.fullName)}
             </Card.Text>
             <Card.Title>Correo electrónico</Card.Title>
             <Card.Text className="text-secondary-emphasis">
