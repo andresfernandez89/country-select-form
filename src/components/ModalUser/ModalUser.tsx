@@ -5,15 +5,34 @@ import Modal from "react-bootstrap/Modal";
 import { IFormValues } from "../../types/form";
 import { IModalUserProps } from "../../types/modal";
 import showConfirmationAlert from "../alert/showConfirmationAlert";
+import showErrorConfirmationAlert from "../alert/showErrorConfirmationAlert";
 import styles from "./modalUser.module.css";
 
 function ModalUser({ show, onHide }: IModalUserProps) {
   const { values, handleReset } = useFormikContext<IFormValues>();
-  function handleOnClick() {
-    showConfirmationAlert().then(() => {
+  async function handleOnClick() {
+    try {
+      //Casos de uso simulando envios reales.
+
+      /* const response = await fetch("https://minexus/api/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error("Data sending error");
+      } */
+      await showConfirmationAlert();
+
       handleReset();
       onHide();
-    });
+    } catch (error) {
+      console.error(error);
+      showErrorConfirmationAlert();
+    }
   }
   return (
     <Modal
