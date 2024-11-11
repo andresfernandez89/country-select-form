@@ -14,7 +14,8 @@ export function showConfirmationAlert() {
   });
   return Toast.fire({
     icon: "success",
-    title: "Signed in successfully",
+    title: "Enviando datos",
+    confirmButtonColor: "#0d6efd",
   });
 }
 
