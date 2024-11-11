@@ -1,50 +1,71 @@
-# React + TypeScript + Vite
+# Country Select Form
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This application is a country selection form built with Vite and TypeScript. It includes features for selecting countries and dynamically updating provinces based on the selected country.
 
-Currently, two official plugins are available:
+## Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+https://country-select-form.pages.dev/
 
-## Expanding the ESLint configuration
+## Table of Contents
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [Tech Stack](#tech-stack)
+- [Run Locally](#run-locally)
+- [Environment Variables](#environment-variables)
+- [Scripts](#scripts)
+- [Links](#links)
 
-- Configure the top-level `parserOptions` property like this:
+## Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Vite
+- TypeScript
+- React
+- Formik
+- Yup
+- Bootstrap
+
+## Run Locally
+
+Clone the project
+
+```bash
+git clone https://github.com/andresfernandez89/country-select-form.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Go to the project directory
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+  cd country-select-form
 ```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your **`.env`** file:
+
+```env
+VITE_API_BASE_URL=api_base_url
+```
+
+## Scripts
+
+- **dev:** Start the development server.
+- **build:** Build the application.
+- **format:** Format the code with Prettier.
+- **lint:** Lint the code.
+- **preview:** Preview the production build.
+- **prepare:** Set up Husky for Git hooks.
+
+## Links
+
+- [@andresfernandez89](https://github.com/andresfernandez89)
