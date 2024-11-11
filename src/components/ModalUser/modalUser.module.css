@@ -2,13 +2,8 @@
   min-height: 100vh;
 }
 
-@media (min-width: 576px) {
-  .containerModal {
-    padding: 3rem;
-  }
-}
 .containerBody {
-  height: 570px;
+  height: 530px;
   padding: 0;
   border-width: 0;
 }
